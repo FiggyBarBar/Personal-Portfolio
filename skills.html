@@ -37,16 +37,40 @@ Date: 3/24/2026
   </ul>
 </nav>
 
-<!-- Mobile View Content, list replaces table on small screens -->
+<!-- Mobile View Content -->
 <main class="mobile-section">
   <section id="skills">
     <h2>Technical Skills</h2>
-    <ol>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>JavaScript</li>
-      <li>Python</li>
-    </ol>
+    <div>
+      <div class="skill-row">
+        <div class="skill-row-header">
+          <span class="skill-row-name">HTML</span>
+          <span class="skill-row-pct">35%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-pct="35%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-header">
+          <span class="skill-row-name">CSS</span>
+          <span class="skill-row-pct">30%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-pct="30%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-header">
+          <span class="skill-row-name">JavaScript</span>
+          <span class="skill-row-pct">25%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-pct="25%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-header">
+          <span class="skill-row-name">Python</span>
+          <span class="skill-row-pct">20%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-pct="20%"></div></div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -55,12 +79,12 @@ Date: 3/24/2026
   <section id="skills">
     <h2>Technical Skills</h2>
 
-    <!-- skills table with 4 rows and 3 columns -->
     <table class="skills-table">
       <thead>
         <tr>
           <th>Technology</th>
           <th>Proficiency</th>
+          <th>Progress</th>
           <th>Experience</th>
         </tr>
       </thead>
@@ -68,21 +92,25 @@ Date: 3/24/2026
         <tr>
           <td>HTML</td>
           <td><span class="badge badge-beginner">Beginner</span></td>
+          <td style="min-width:120px"><div class="skill-bar"><div class="skill-bar-fill" data-pct="35%"></div></div></td>
           <td>Less than a year</td>
         </tr>
         <tr>
           <td>CSS</td>
           <td><span class="badge badge-beginner">Beginner</span></td>
+          <td><div class="skill-bar"><div class="skill-bar-fill" data-pct="30%"></div></div></td>
           <td>Less than a year</td>
         </tr>
         <tr>
           <td>JavaScript</td>
           <td><span class="badge badge-beginner">Beginner</span></td>
+          <td><div class="skill-bar"><div class="skill-bar-fill" data-pct="25%"></div></div></td>
           <td>Less than a year</td>
         </tr>
         <tr>
           <td>Python</td>
           <td><span class="badge badge-beginner">Beginner</span></td>
+          <td><div class="skill-bar"><div class="skill-bar-fill" data-pct="20%"></div></div></td>
           <td>Less than a year</td>
         </tr>
       </tbody>

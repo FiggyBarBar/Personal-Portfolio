@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<!-- TyVaughn Yazzie | 2026-04-29 -->
+<!--
+Name: TyVaughn Yazzie
+File Name: Index.html
+Date: 4/29/2026
+-->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -13,9 +17,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Apple macOS dark theme overrides -->
   <style>
-    /* macOS dark color system */
     :root {
       --bg:        #000000;
       --panel:     #1c1c1e;
@@ -24,6 +26,7 @@
       --secondary: rgba(235, 235, 245, 0.6);
       --tertiary:  rgba(235, 235, 245, 0.3);
       --accent:    #0a84ff;
+      --purple:    #bf5af2;
       --green:     #30d158;
       --line:      rgba(84, 84, 88, 0.65);
       --glass:     rgba(28, 28, 30, 0.72);
@@ -39,7 +42,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif !important;
       padding: 0 16px;
       -webkit-font-smoothing: antialiased;
-      animation: fadeIn 0.35s ease;
+      animation: fadeIn 0.5s ease;
     }
 
     a { color: var(--accent); text-decoration: none; transition: opacity 0.18s ease; }
@@ -48,16 +51,16 @@
     /* Ambient blobs */
     body::before {
       content: '';
-      position: fixed; top: -20%; left: -15%;
-      width: 60%; height: 60%;
-      background: radial-gradient(ellipse at center, rgba(10, 132, 255, 0.08) 0%, transparent 65%);
+      position: fixed; top: -25%; left: -20%;
+      width: 70%; height: 70%;
+      background: radial-gradient(ellipse at center, rgba(10, 132, 255, 0.12) 0%, transparent 65%);
       pointer-events: none; z-index: -1;
     }
     body::after {
       content: '';
-      position: fixed; bottom: -15%; right: -15%;
-      width: 55%; height: 55%;
-      background: radial-gradient(ellipse at center, rgba(191, 90, 242, 0.06) 0%, transparent 65%);
+      position: fixed; bottom: -20%; right: -20%;
+      width: 65%; height: 65%;
+      background: radial-gradient(ellipse at center, rgba(191, 90, 242, 0.10) 0%, transparent 65%);
       pointer-events: none; z-index: -1;
     }
 
@@ -66,7 +69,7 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(84, 84, 88, 0.5); border-radius: 3px; }
 
-    /* ── Navbar ── frosted glass pill */
+    /* Navbar */
     .navbar {
       background: var(--glass) !important;
       backdrop-filter: blur(20px);
@@ -105,7 +108,7 @@
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245,245,247,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 
-    /* ── Jumbotron ── hero hero hero */
+    /* Jumbotron */
     .jumbotron {
       background: var(--glass) !important;
       backdrop-filter: blur(30px);
@@ -114,34 +117,89 @@
       border-radius: 20px !important;
       color: var(--ink) !important;
       text-align: center;
-      padding: 52px 32px !important;
+      padding: 56px 32px !important;
       max-width: 1100px;
       margin: 0 auto 28px;
     }
 
+    /* Gradient hero title */
     .jumbotron h1 {
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
       font-weight: 700;
       letter-spacing: -0.5px;
-      color: var(--ink);
-      animation: titleGlow 4s ease-in-out infinite;
+      background: linear-gradient(135deg, #f5f5f7 0%, var(--accent) 50%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 6s ease-in-out infinite;
+      background-size: 200% 200%;
     }
 
     .jumbotron .lead { color: var(--secondary); font-size: 1.05rem; }
     .jumbotron hr { border-color: var(--line); }
     .jumbotron p { color: var(--secondary); font-size: 0.95rem; }
 
-    /* Profile picture */
-    .pfp-hero {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 50% !important;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      display: block;
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(48, 209, 88, 0.1);
+      border: 1px solid rgba(48, 209, 88, 0.25);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.82em;
+      font-weight: 500;
+      color: var(--green);
+      margin-bottom: 18px;
+      letter-spacing: 0.2px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(48, 209, 88, 0.7);
+      animation: dotPulseGreen 2.5s ease-in-out infinite;
+    }
+
+    /* Profile picture with spinning gradient ring */
+    .pfp-wrapper {
+      position: relative;
+      width: 152px;
+      height: 152px;
       margin: 0 auto 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
       animation: float 5s ease-in-out infinite;
+    }
+
+    .pfp-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent), var(--purple), var(--green), var(--accent));
+      animation: spinRing 5s linear infinite;
+      z-index: 0;
+    }
+
+    .pfp-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
+      background: var(--bg);
+      z-index: 1;
+    }
+
+    .pfp-hero {
+      position: absolute;
+      inset: 5px;
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      object-fit: cover;
+      border-radius: 50%;
+      z-index: 2;
     }
 
     .btn-apple {
@@ -163,28 +221,31 @@
       box-shadow: 0 4px 20px rgba(10, 132, 255, 0.5);
     }
 
-    /* ── Main ── */
+    /* Main */
     .portfolio-main {
       max-width: 1100px;
       margin: 0 auto;
       padding-bottom: 24px;
     }
 
-    /* ── Apple card ── dark panel */
+    /* Apple card */
     .apple-card {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 16px;
       padding: 22px;
       box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
+      transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
       color: var(--ink);
       height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .apple-card:hover {
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(10, 132, 255, 0.18);
-      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(10, 132, 255, 0.22);
+      transform: translateY(-3px);
+      border-color: rgba(10, 132, 255, 0.2);
     }
 
     .apple-card h2, .apple-card h5 {
@@ -215,9 +276,20 @@
       font-size: 0.95em;
       line-height: 1.65;
       margin-bottom: 0;
+      flex: 1;
     }
 
-    /* ── Green aside card ── location */
+    /* Card category label */
+    .card-label {
+      font-size: 0.7em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--tertiary);
+      margin-bottom: 14px;
+    }
+
+    /* Green aside card */
     .apple-card-green {
       background: rgba(48, 209, 88, 0.06);
       border: 1px solid rgba(48, 209, 88, 0.2);
@@ -226,6 +298,12 @@
       box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
       color: var(--ink);
       height: 100%;
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    .apple-card-green:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(48, 209, 88, 0.2);
+      transform: translateY(-3px);
     }
 
     .apple-card-green h2 {
@@ -252,15 +330,48 @@
     /* Skill pills */
     .skill-pill {
       display: inline-block;
-      padding: 4px 12px;
+      padding: 5px 13px;
       border-radius: 20px;
       font-size: 0.82em;
       font-weight: 500;
-      background: rgba(10, 132, 255, 0.15);
+      background: rgba(10, 132, 255, 0.12);
       color: var(--accent);
-      border: 1px solid rgba(10, 132, 255, 0.25);
+      border: 1px solid rgba(10, 132, 255, 0.22);
       margin: 4px 4px 0 0;
       letter-spacing: 0.2px;
+      transition: background 0.18s ease, transform 0.15s ease;
+    }
+
+    .skill-pill:hover {
+      background: rgba(10, 132, 255, 0.22);
+      transform: translateY(-1px);
+    }
+
+    /* Project tech tags */
+    .tech-tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.74em;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--tertiary);
+      border: 1px solid var(--line);
+      margin: 6px 3px 0 0;
+    }
+
+    /* Coming soon badge */
+    .badge-soon {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.74em;
+      font-weight: 600;
+      background: rgba(255, 159, 10, 0.12);
+      color: #ff9f0a;
+      border: 1px solid rgba(255, 159, 10, 0.25);
+      margin-left: 6px;
+      vertical-align: middle;
     }
 
     /* Contact list */
@@ -275,8 +386,10 @@
       border-bottom: 1px solid var(--line);
       font-size: 0.93em;
       color: var(--secondary);
+      transition: color 0.18s ease;
     }
 
+    .contact-list li:hover { color: var(--ink); }
     .contact-list li:last-child { border-bottom: none; }
     .contact-list a { color: var(--accent); }
 
@@ -297,7 +410,7 @@
       margin-right: 4px;
     }
 
-    /* ── Footer ── */
+    /* Footer */
     footer {
       background: var(--glass) !important;
       backdrop-filter: blur(20px);
@@ -325,22 +438,41 @@
     footer li { color: var(--secondary); font-size: 0.92em; }
     footer a { color: var(--accent); }
 
-    /* ── Keyframes ── */
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Keyframes */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(-7px); }
     }
-    @keyframes titleGlow {
-      0%, 100% { text-shadow: 0 0 40px rgba(10, 132, 255, 0.25); }
-      50%       { text-shadow: 0 0 70px rgba(10, 132, 255, 0.55), 0 0 100px rgba(191, 90, 242, 0.2); }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50%       { background-position: 100% 50%; }
     }
     @keyframes dotPulse {
       0%, 100% { box-shadow: 0 0 6px rgba(10, 132, 255, 0.5); }
       50%       { box-shadow: 0 0 16px rgba(10, 132, 255, 1); }
+    }
+    @keyframes dotPulseGreen {
+      0%, 100% { box-shadow: 0 0 6px rgba(48, 209, 88, 0.5); }
+      50%       { box-shadow: 0 0 14px rgba(48, 209, 88, 1); }
     }
   </style>
 </head>
@@ -365,10 +497,16 @@
   </div>
 </nav>
 
-<!-- Bootstrap Jumbotron -->
+<!-- Hero -->
 <div class="jumbotron">
-  <img src="images/tyvaughn.jpg" class="img-fluid pfp-hero" alt="Picture of TyVaughn Yazzie">
-  <h1 class="display-4">TyVaughn Yazzie's Portfolio</h1>
+  <div class="status-badge">
+    <span class="status-dot"></span>
+    Available for projects
+  </div>
+  <div class="pfp-wrapper">
+    <img src="images/tyvaughn.jpg" class="pfp-hero" alt="Picture of TyVaughn Yazzie">
+  </div>
+  <h1 class="display-4">TyVaughn Yazzie</h1>
   <p class="lead">Web Developer &amp; Technology Enthusiast</p>
   <hr class="my-4">
   <p>Building innovative websites that connect people and technology.</p>
@@ -380,8 +518,9 @@
   <div class="row">
 
     <!-- About -->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-4 reveal">
       <div class="apple-card">
+        <p class="card-label">Who I am</p>
         <h2>About</h2>
         <p>
           Hello! I'm TyVaughn Yazzie, a passionate web developer with interest
@@ -392,8 +531,9 @@
     </div>
 
     <!-- Skills -->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-4 reveal">
       <div class="apple-card">
+        <p class="card-label">What I work with</p>
         <h2>Skills</h2>
         <div>
           <span class="skill-pill">HTML5</span>
@@ -407,35 +547,53 @@
     </div>
 
     <!-- Projects -->
-    <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4 reveal">
       <div class="apple-card">
+        <p class="card-label">Project</p>
         <h5>Calculator</h5>
         <p>A fully functional web-based calculator built with HTML, CSS, and JavaScript.</p>
-        <a class="btn-apple" href="calculator.html" style="margin-top:14px;font-size:0.88em;padding:8px 18px;">View Project</a>
+        <div>
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <a class="btn-apple" href="calculator.html" style="margin-top:16px;font-size:0.85em;padding:8px 18px;">View Project</a>
       </div>
     </div>
 
-    <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4 reveal">
       <div class="apple-card">
-        <h5>Multiplayer Web Browser Game</h5>
+        <p class="card-label">Project</p>
+        <h5>Multiplayer Browser Game <span class="badge-soon">Coming Soon</span></h5>
         <p>A real-time multiplayer game playable directly in the browser.</p>
+        <div>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">WebSockets</span>
+          <span class="tech-tag">HTML Canvas</span>
+        </div>
       </div>
     </div>
 
-    <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4 reveal">
       <div class="apple-card">
-        <h5>Personal Finance AI Agent</h5>
+        <p class="card-label">Project</p>
+        <h5>Personal Finance AI Agent <span class="badge-soon">Coming Soon</span></h5>
         <p>An AI-powered tool to help users track and manage their personal finances.</p>
+        <div>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">AI</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
       </div>
     </div>
 
     <!-- Contact info -->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-4 reveal">
       <div class="apple-card">
+        <p class="card-label">Get in touch</p>
         <h2>Contact</h2>
         <ul class="contact-list">
           <li>&#9993; <a href="mailto:tyvyaz_e@icloud.com">tyvyaz_e@icloud.com</a></li>
-          <li>&#9742; +1 (928) 380-5193</li>
           <li>&#128205; Arizona</li>
           <li>
             <img src="images/linkedin-icon.svg" alt="LinkedIn" class="social-icon">
@@ -447,7 +605,7 @@
     </div>
 
     <!-- Location map -->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-4 reveal">
       <div class="apple-card-green">
         <h2>Location</h2>
         <iframe
@@ -467,7 +625,6 @@
   <p>TyVaughn Yazzie</p>
   <ul>
     <li>Email &#9993; : <a href="mailto:tyvyaz_e@icloud.com">tyvyaz_e@icloud.com</a></li>
-    <li>Phone &#9742; : +1 (928) 380-5193</li>
     <li>
       <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <img src="images/linkedin-icon.svg" alt="LinkedIn" class="social-icon">LinkedIn
@@ -481,5 +638,17 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

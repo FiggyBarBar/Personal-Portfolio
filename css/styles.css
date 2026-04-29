@@ -1,7 +1,7 @@
 /*
 Name: TyVaughn Yazzie
+File Name: styles.css
 Date: 3/24/2026
-File: styles.css
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -26,7 +26,8 @@ html {
   --secondary: rgba(235, 235, 245, 0.6);
   --tertiary:  rgba(235, 235, 245, 0.3);
   --accent:   #0a84ff;
-  --orange:   #30d158;
+  --purple:   #bf5af2;
+  --orange:   #ff9f0a;
   --red:      #ff453a;
   --green:    #30d158;
   --line:     rgba(84, 84, 88, 0.65);
@@ -378,37 +379,98 @@ aside h2::before {
   box-shadow: 0 0 8px rgba(48, 209, 88, 0.6);
 }
 
-#contact {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 20px 22px;
-  margin-top: 20px;
+/* Contact page — two-column grid layout */
+.contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-/* contact info list - macOS settings-row style */
-#contact ul {
-  list-style: none;
-  margin-top: 14px;
+.contact-left {
+  display: flex;
+  flex-direction: column;
 }
 
-#contact li {
-  padding: 11px 0;
+/* Contact info rows — macOS settings-row style */
+.contact-info-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 0.93em;
-  color: var(--secondary);
 }
 
-#contact li:last-child {
+.contact-info-row:last-child {
   border-bottom: none;
 }
 
+.contact-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 132, 255, 0.1);
+  border: 1px solid rgba(10, 132, 255, 0.22);
+  border-radius: 9px;
+  font-size: 0.9em;
+  color: var(--accent);
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contact-label {
+  font-size: 0.72em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--tertiary);
+}
+
+.contact-value {
+  font-size: 0.93em;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+a.contact-value {
+  color: var(--accent);
+}
+
+a.contact-value:hover {
+  opacity: 0.75;
+}
+
+/* Form intro text */
+.form-intro {
+  color: var(--secondary);
+  font-size: 0.9em;
+  margin-top: -2px;
+  margin-bottom: 4px;
+  line-height: 1.55;
+}
+
+/* Map embed */
 iframe {
   width: 100%;
   max-width: 100%;
   border: 0;
   border-radius: 14px;
   margin-top: 14px;
+}
+
+.map-embed {
+  height: 220px;
+  display: block;
 }
 
 /* Skills Table - macOS-style minimal table */
@@ -616,6 +678,8 @@ footer li {
   .skills-table td { padding: 13px 18px; }
 
   .contact-form { max-width: 560px; }
+
+  .map-embed { height: 260px; }
 }
 
 /* Desktop Layout (min-width: 900px) */
@@ -660,6 +724,20 @@ footer li {
   .contact-form select,
   .contact-form textarea,
   .submit-btn { grid-column: 1 / -1; }
+
+  /* Contact page side-by-side layout */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  #contact-form .contact-form {
+    max-width: none;
+  }
+
+  .map-embed { height: 250px; }
 }
 
 /* proficiency badge pill */
@@ -798,4 +876,146 @@ footer li {
   background: rgba(255, 69, 58, 0.12);
   color: var(--red);
   border: 1px solid rgba(255, 69, 58, 0.3);
+}
+
+/* Smooth out transition curves globally */
+nav a, section, .card, aside, a, .submit-btn {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Active nav link */
+nav a.active {
+  background-color: rgba(10, 132, 255, 0.12);
+  color: var(--accent);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  z-index: 9999;
+  border-radius: 0 2px 2px 0;
+  pointer-events: none;
+}
+
+/* Cursor glow (desktop only) */
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(10, 132, 255, 0.055) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: left 0.07s linear, top 0.07s linear;
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 42px; height: 42px;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--secondary);
+  font-size: 1.1em;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease;
+  z-index: 999;
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover {
+  background: rgba(10, 132, 255, 0.15);
+  color: var(--accent);
+  border-color: rgba(10, 132, 255, 0.3);
+}
+
+/* Skill bars */
+.skill-row {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.skill-row:last-child { border-bottom: none; }
+.skill-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+.skill-row-name { font-size: 0.93em; color: var(--ink); font-weight: 500; }
+.skill-row-pct  { font-size: 0.79em; color: var(--secondary); }
+.skill-bar {
+  height: 3px;
+  background: rgba(84, 84, 88, 0.35);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Timeline (journey page) */
+.timeline {
+  position: relative;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 16px; bottom: 16px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--purple), transparent);
+  border-radius: 2px;
+}
+.timeline .timeline-item {
+  position: relative;
+  margin-left: 14px;
+}
+.timeline .timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px; top: 19px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(10, 132, 255, 0.7);
+  border: 2px solid var(--bg);
+  z-index: 1;
+}
+
+/* Tech tags */
+.tech-tag {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 0.75em;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--tertiary);
+  border: 1px solid var(--line);
+  margin: 6px 3px 0 0;
 }
