@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!--
+Name: TyVaughn Yazzie
+File Name: calculator.html
+Date: 3/24/2026
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator App | TyVaughn Yazzie</title>
+  <meta name="description" content="An interactive calculator application built with HTML, CSS, and JavaScript by TyVaughn Yazzie, featuring a macOS-inspired dark design.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <style>
+
+    /* centers the calc and caps its width */
+    .calc-wrapper {
+      max-width: 340px;
+      margin: 30px auto;
+      padding: 0 12px;
+    }
+
+    /* looks like the macOS Calculator window */
+    .calc {
+      background: #1c1c1e;
+      border-radius: 22px;
+      padding: 20px 16px 16px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    /* transparent display so numbers float on the dark bg */
+    .display {
+      background: transparent;
+      padding: 16px 8px 14px;
+      margin-bottom: 12px;
+      text-align: right;
+      min-height: 90px;
+    }
+
+    .display-expression {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+      font-size: 0.85em;
+      color: rgba(235, 235, 245, 0.4);
+      min-height: 22px;
+      word-break: break-all;
+    }
+
+    /* thin light number like macOS Calculator */
+    .display-result {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+      font-size: 3em;
+      font-weight: 300;
+      color: #ffffff;
+      word-break: break-all;
+      line-height: 1.1;
+    }
+
+    /* 4 column grid for the buttons */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* circular number buttons */
+    .btn-calc {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+      font-size: 1.25em;
+      font-weight: 400;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: #3a3a3c;
+      color: #ffffff;
+      cursor: pointer;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: none;
+      transition: opacity 0.12s ease, transform 0.08s ease;
+    }
+
+    .btn-calc:active {
+      opacity: 0.5;
+      transform: scale(0.92);
+    }
+
+    /* +, -, ×, ÷ are blue */
+    .btn-operator {
+      background: #0a84ff;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    /* C and backspace are function-gray */
+    .btn-clear {
+      background: #636366;
+      color: #ffffff;
+    }
+
+    /* = spans 2 rows so it can't be a circle - make it a tall pill */
+    .btn-equals {
+      background: #0a84ff;
+      color: #ffffff;
+      font-weight: 500;
+      aspect-ratio: unset;
+      border-radius: 40px;
+    }
+
+    /* 0 is a wide pill spanning 2 columns */
+    .btn-zero {
+      grid-column: span 2;
+      border-radius: 40px;
+      aspect-ratio: unset;
+      justify-content: flex-start;
+      padding-left: 26px;
+    }
+
+    /* macOS window traffic light dots */
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      padding: 4px 4px 10px;
+    }
+
+    .wc-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .wc-red    { background: #ff5f57; }
+    .wc-yellow { background: #febc2e; }
+    .wc-green  { background: #28c840; }
+
+    /* back to projects link */
+    .back-link-wrap {
+      text-align: center;
+      margin-top: 22px;
+    }
+
+    .back-link-wrap a {
+      font-size: 0.93em;
+      color: #0a84ff;
+    }
+
+    .back-link-wrap a:hover {
+      opacity: 0.72;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Calculator</h1>
+</header>
+
+<nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="journey.html">Journey</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="calc-wrapper">
+    <div class="calc">
+
+      <!-- macOS window chrome dots -->
+      <div class="window-controls">
+        <span class="wc-dot wc-red"></span>
+        <span class="wc-dot wc-yellow"></span>
+        <span class="wc-dot wc-green"></span>
+      </div>
+
+      <!-- screen that shows what you're typing -->
+      <div class="display">
+        <div class="display-expression" id="expression"></div>
+        <div class="display-result" id="result">0</div>
+      </div>
+
+      <!-- all the buttons -->
+      <div class="buttons">
+
+        <!-- clear and operators up top -->
+        <button class="btn-calc btn-clear" onclick="clearAll()">C</button>
+        <button class="btn-calc btn-clear" onclick="deleteLast()">⌫</button>
+        <button class="btn-calc btn-operator" onclick="inputOperator('/')">÷</button>
+        <button class="btn-calc btn-operator" onclick="inputOperator('*')">×</button>
+
+        <!-- 7 8 9 -->
+        <button class="btn-calc" onclick="inputNumber('7')">7</button>
+        <button class="btn-calc" onclick="inputNumber('8')">8</button>
+        <button class="btn-calc" onclick="inputNumber('9')">9</button>
+        <button class="btn-calc btn-operator" onclick="inputOperator('-')">−</button>
+
+        <!-- 4 5 6 -->
+        <button class="btn-calc" onclick="inputNumber('4')">4</button>
+        <button class="btn-calc" onclick="inputNumber('5')">5</button>
+        <button class="btn-calc" onclick="inputNumber('6')">6</button>
+        <button class="btn-calc btn-operator" onclick="inputOperator('+')">+</button>
+
+        <!-- 1 2 3 and equals -->
+        <button class="btn-calc" onclick="inputNumber('1')">1</button>
+        <button class="btn-calc" onclick="inputNumber('2')">2</button>
+        <button class="btn-calc" onclick="inputNumber('3')">3</button>
+
+        <!-- equals is tall so it lines up with 0 and decimal too -->
+        <button class="btn-calc btn-equals" style="grid-row: span 2;" onclick="calculate()">=</button>
+
+        <!-- 0 is wide, decimal finishes it off -->
+        <button class="btn-calc btn-zero" onclick="inputNumber('0')">0</button>
+        <button class="btn-calc" onclick="inputDecimal()">.</button>
+
+      </div>
+    </div>
+
+    <div class="back-link-wrap">
+      <a href="projects.html">← Back to Projects</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 TyVaughn Yazzie</p>
+  <div class="social-icons">
+    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="LinkedIn">
+      <img src="images/linkedin-icon.svg" alt="LinkedIn" class="social-icon">
+    </a>
+  </div>
+</footer>
+
+<script>
+
+  let expression = '';       // what the user has typed so far
+  let justCalculated = false; // so typing after = starts fresh
+
+  function inputNumber(num) {
+    if (justCalculated) {
+      expression = '';
+      justCalculated = false;
+    }
+    expression += num;
+    document.getElementById('result').textContent = expression;
+    document.getElementById('expression').textContent = '';
+  }
+
+  function inputOperator(op) {
+    justCalculated = false;
+    if (expression === '') return;
+    // swap it out if they typed two operators in a row
+    if ('+-*/'.includes(expression.slice(-1))) {
+      expression = expression.slice(0, -1);
+    }
+    expression += op;
+    document.getElementById('result').textContent = expression;
+    document.getElementById('expression').textContent = '';
+  }
+
+  function inputDecimal() {
+    if (justCalculated) {
+      expression = '0';
+      justCalculated = false;
+    }
+    // grab the last number to check if it already has a decimal
+    const parts = expression.split(/[+\-*/]/);
+    const lastPart = parts[parts.length - 1];
+    if (lastPart.includes('.')) return;
+    if (lastPart === '') expression += '0'; // e.g. typing "." alone becomes "0."
+    expression += '.';
+    document.getElementById('result').textContent = expression;
+  }
+
+  function deleteLast() {
+    expression = expression.slice(0, -1);
+    document.getElementById('result').textContent = expression || '0';
+    document.getElementById('expression').textContent = '';
+    justCalculated = false;
+  }
+
+  function clearAll() {
+    expression = '';
+    document.getElementById('result').textContent = '0';
+    document.getElementById('expression').textContent = '';
+    justCalculated = false;
+  }
+
+  function calculate() {
+    if (!expression || '+-*/'.includes(expression.slice(-1))) return;
+    try {
+      document.getElementById('expression').textContent = expression + ' =';
+      const result = Function('"use strict"; return (' + expression + ')')();
+      // rounding fixes stuff like 0.1 + 0.2 showing as 0.30000000004
+      const rounded = Math.round(result * 1e10) / 1e10;
+      document.getElementById('result').textContent = rounded;
+      expression = String(rounded);
+      justCalculated = true;
+    } catch (e) {
+      document.getElementById('result').textContent = 'Error';
+      expression = '';
+      justCalculated = true;
+    }
+  }
+
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

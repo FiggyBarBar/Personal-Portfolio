@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<!-- TyVaughn Yazzie | 2026-04-29 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="TyVaughn Yazzie's personal portfolio - web developer specializing in HTML, CSS, JavaScript, and Python.">
+  <title>TyVaughn Yazzie | Web Developer Portfolio</title>
+
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Apple macOS dark theme overrides -->
+  <style>
+    /* macOS dark color system */
+    :root {
+      --bg:        #000000;
+      --panel:     #1c1c1e;
+      --card:      #2c2c2e;
+      --ink:       #f5f5f7;
+      --secondary: rgba(235, 235, 245, 0.6);
+      --tertiary:  rgba(235, 235, 245, 0.3);
+      --accent:    #0a84ff;
+      --green:     #30d158;
+      --line:      rgba(84, 84, 88, 0.65);
+      --glass:     rgba(28, 28, 30, 0.72);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg) !important;
+      color: var(--ink) !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif !important;
+      padding: 0 16px;
+      -webkit-font-smoothing: antialiased;
+      animation: fadeIn 0.35s ease;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: opacity 0.18s ease; }
+    a:hover { opacity: 0.72; }
+
+    /* Ambient blobs */
+    body::before {
+      content: '';
+      position: fixed; top: -20%; left: -15%;
+      width: 60%; height: 60%;
+      background: radial-gradient(ellipse at center, rgba(10, 132, 255, 0.08) 0%, transparent 65%);
+      pointer-events: none; z-index: -1;
+    }
+    body::after {
+      content: '';
+      position: fixed; bottom: -15%; right: -15%;
+      width: 55%; height: 55%;
+      background: radial-gradient(ellipse at center, rgba(191, 90, 242, 0.06) 0%, transparent 65%);
+      pointer-events: none; z-index: -1;
+    }
+
+    /* Thin macOS scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(84, 84, 88, 0.5); border-radius: 3px; }
+
+    /* ── Navbar ── frosted glass pill */
+    .navbar {
+      background: var(--glass) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      max-width: 1100px;
+      margin: 16px auto 20px;
+      padding: 6px 14px;
+    }
+
+    .navbar-brand {
+      color: var(--ink) !important;
+      font-weight: 600;
+      font-size: 0.97rem;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-link {
+      color: var(--ink) !important;
+      font-weight: 500;
+      font-size: 0.93em;
+      border-radius: 10px;
+      padding: 8px 14px !important;
+      transition: background-color 0.18s ease, transform 0.15s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      transform: translateY(-1px);
+      opacity: 1 !important;
+    }
+
+    .navbar-toggler { border: none; }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245,245,247,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* ── Jumbotron ── hero hero hero */
+    .jumbotron {
+      background: var(--glass) !important;
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--line);
+      border-radius: 20px !important;
+      color: var(--ink) !important;
+      text-align: center;
+      padding: 52px 32px !important;
+      max-width: 1100px;
+      margin: 0 auto 28px;
+    }
+
+    .jumbotron h1 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+      animation: titleGlow 4s ease-in-out infinite;
+    }
+
+    .jumbotron .lead { color: var(--secondary); font-size: 1.05rem; }
+    .jumbotron hr { border-color: var(--line); }
+    .jumbotron p { color: var(--secondary); font-size: 0.95rem; }
+
+    /* Profile picture */
+    .pfp-hero {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50% !important;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      display: block;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .btn-apple {
+      background: var(--accent);
+      color: #fff !important;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95em;
+      padding: 10px 24px;
+      box-shadow: 0 2px 12px rgba(10, 132, 255, 0.4);
+      transition: opacity 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+      display: inline-block;
+    }
+
+    .btn-apple:hover {
+      opacity: 0.86;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(10, 132, 255, 0.5);
+    }
+
+    /* ── Main ── */
+    .portfolio-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-bottom: 24px;
+    }
+
+    /* ── Apple card ── dark panel */
+    .apple-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+      color: var(--ink);
+      height: 100%;
+    }
+
+    .apple-card:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(10, 132, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .apple-card h2, .apple-card h5 {
+      font-size: 1.05em;
+      font-weight: 600;
+      color: var(--ink);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 12px;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .apple-card h2::before, .apple-card h5::before {
+      content: '';
+      flex-shrink: 0;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(10, 132, 255, 0.6);
+      animation: dotPulse 2.8s ease-in-out infinite;
+    }
+
+    .apple-card p {
+      color: var(--secondary);
+      font-size: 0.95em;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    /* ── Green aside card ── location */
+    .apple-card-green {
+      background: rgba(48, 209, 88, 0.06);
+      border: 1px solid rgba(48, 209, 88, 0.2);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+      color: var(--ink);
+      height: 100%;
+    }
+
+    .apple-card-green h2 {
+      font-size: 1.05em;
+      font-weight: 600;
+      color: var(--green);
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(48, 209, 88, 0.18);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .apple-card-green h2::before {
+      content: '';
+      flex-shrink: 0;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(48, 209, 88, 0.6);
+    }
+
+    /* Skill pills */
+    .skill-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82em;
+      font-weight: 500;
+      background: rgba(10, 132, 255, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(10, 132, 255, 0.25);
+      margin: 4px 4px 0 0;
+      letter-spacing: 0.2px;
+    }
+
+    /* Contact list */
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-list li {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.93em;
+      color: var(--secondary);
+    }
+
+    .contact-list li:last-child { border-bottom: none; }
+    .contact-list a { color: var(--accent); }
+
+    /* Map iframe */
+    iframe {
+      border: 0 !important;
+      border-radius: 12px;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    /* Social icon */
+    .social-icon {
+      width: 18px; height: 18px;
+      border-radius: 4px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--glass) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--line);
+      color: var(--secondary);
+      text-align: center;
+      padding: 28px 16px;
+      margin-top: 44px;
+      font-size: 0.88em;
+    }
+
+    footer p { color: var(--secondary); font-size: 0.95em; margin-bottom: 0; }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 20px;
+    }
+
+    footer li { color: var(--secondary); font-size: 0.92em; }
+    footer a { color: var(--accent); }
+
+    /* ── Keyframes ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-7px); }
+    }
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 0 0 40px rgba(10, 132, 255, 0.25); }
+      50%       { text-shadow: 0 0 70px rgba(10, 132, 255, 0.55), 0 0 100px rgba(191, 90, 242, 0.2); }
+    }
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 6px rgba(10, 132, 255, 0.5); }
+      50%       { box-shadow: 0 0 16px rgba(10, 132, 255, 1); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Bootstrap Navbar -->
+<nav class="navbar navbar-expand-md">
+  <a class="navbar-brand" href="#">TyVaughn Yazzie</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav"
+    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="mainNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a class="nav-link active" href="Index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
+      <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      <li class="nav-item"><a class="nav-link" href="journey.html">Journey</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Bootstrap Jumbotron -->
+<div class="jumbotron">
+  <img src="images/tyvaughn.jpg" class="img-fluid pfp-hero" alt="Picture of TyVaughn Yazzie">
+  <h1 class="display-4">TyVaughn Yazzie's Portfolio</h1>
+  <p class="lead">Web Developer &amp; Technology Enthusiast</p>
+  <hr class="my-4">
+  <p>Building innovative websites that connect people and technology.</p>
+  <a class="btn-apple btn-lg" href="about.html" role="button">Learn More</a>
+</div>
+
+<!-- Main Content -->
+<main class="portfolio-main">
+  <div class="row">
+
+    <!-- About -->
+    <div class="col-md-6 mb-4">
+      <div class="apple-card">
+        <h2>About</h2>
+        <p>
+          Hello! I'm TyVaughn Yazzie, a passionate web developer with interest
+          in learning how to create engaging and user-friendly websites.
+          I specialize in CSS, HTML, JavaScript, and Python.
+        </p>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="col-md-6 mb-4">
+      <div class="apple-card">
+        <h2>Skills</h2>
+        <div>
+          <span class="skill-pill">HTML5</span>
+          <span class="skill-pill">CSS3</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Bootstrap</span>
+          <span class="skill-pill">Responsive Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="col-md-4 mb-4">
+      <div class="apple-card">
+        <h5>Calculator</h5>
+        <p>A fully functional web-based calculator built with HTML, CSS, and JavaScript.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="apple-card">
+        <h5>Multiplayer Web Browser Game</h5>
+        <p>A real-time multiplayer game playable directly in the browser.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="apple-card">
+        <h5>Personal Finance AI Agent</h5>
+        <p>An AI-powered tool to help users track and manage their personal finances.</p>
+      </div>
+    </div>
+
+    <!-- Contact info -->
+    <div class="col-md-6 mb-4">
+      <div class="apple-card">
+        <h2>Contact</h2>
+        <ul class="contact-list">
+          <li>&#9993; <a href="mailto:tyvyaz_e@icloud.com">tyvyaz_e@icloud.com</a></li>
+          <li>&#9742; +1 (928) 380-5193</li>
+          <li>&#128205; Arizona</li>
+          <li>
+            <img src="images/linkedin-icon.svg" alt="LinkedIn" class="social-icon">
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </li>
+          <li>&#128025; GitHub: <a href="https://github.com/FiggyBarBar" target="_blank" rel="noopener noreferrer">FiggyBarBar</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Location map -->
+    <div class="col-md-6 mb-4">
+      <div class="apple-card-green">
+        <h2>Location</h2>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12791.342087439196!2d-110.2560750891092!3d36.7265112562837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8730d751ca576f1b%3A0x8605087bd82fc8f3!2sMonument%20Valley%20High%20School!5e0!3m2!1sen!2sus!4v1770869605695!5m2!1sen!2sus"
+          height="260"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <p>TyVaughn Yazzie</p>
+  <ul>
+    <li>Email &#9993; : <a href="mailto:tyvyaz_e@icloud.com">tyvyaz_e@icloud.com</a></li>
+    <li>Phone &#9742; : +1 (928) 380-5193</li>
+    <li>
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <img src="images/linkedin-icon.svg" alt="LinkedIn" class="social-icon">LinkedIn
+      </a>
+    </li>
+    <li>Location : Arizona</li>
+    <li>GitHub : <a href="https://github.com/FiggyBarBar" target="_blank" rel="noopener noreferrer">FiggyBarBar</a></li>
+  </ul>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

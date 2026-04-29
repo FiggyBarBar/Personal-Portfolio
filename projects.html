@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+Name: TyVaughn Yazzie
+File Name: projects.html
+Date: 3/24/2026
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Projects | TyVaughn Yazzie</title>
+  <meta name="description" content="Browse TyVaughn Yazzie's projects including a JavaScript calculator, a multiplayer web browser game, and a personal finance AI agent.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h1>My Projects</h1>
+</header>
+
+<nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="journey.html">Journey</a></li>
+  </ul>
+</nav>
+
+<!-- Mobile View Content -->
+<main class="mobile-section">
+  <article id="projects">
+
+    <section class="clickable-card" onclick="location.href='calculator.html'">
+      <h2>Calculator Application</h2>
+      <p>
+        A functional calculator built using HTML, CSS, and JavaScript.
+        This project demonstrates interactive design and logical problem-solving.
+      </p>
+      <span class="click-hint">Click anywhere on this card to open</span>
+    </section>
+
+    <section class="not-ready">
+      <h2>Multiplayer Web Browser Game</h2>
+      <p>
+        A browser-based multiplayer game focused on real-time interaction
+        and engaging gameplay mechanics.
+      </p>
+    </section>
+
+    <section class="not-ready">
+      <h2>Personal Finance AI Agent</h2>
+      <p>
+        An AI-powered project designed to help users track spending,
+        manage budgets, and improve financial decision-making.
+      </p>
+    </section>
+
+  </article>
+</main>
+
+<!-- Tablet/Desktop View Content -->
+<main class="desktop-section">
+  <article class="grid" id="projects">
+
+    <section class="clickable-card" onclick="location.href='calculator.html'">
+      <h2>Calculator Application</h2>
+      <p>
+        A functional calculator built using HTML, CSS, and JavaScript.
+        This project demonstrates interactive design and logical problem-solving.
+      </p>
+      <span class="click-hint">Click anywhere on this card to open</span>
+    </section>
+
+    <section class="not-ready">
+      <h2>Multiplayer Web Browser Game</h2>
+      <p>
+        A browser-based multiplayer game focused on real-time interaction
+        and engaging gameplay mechanics.
+      </p>
+    </section>
+
+    <section class="not-ready">
+      <h2>Personal Finance AI Agent</h2>
+      <p>
+        An AI-powered project designed to help users track spending,
+        manage budgets, and improve financial decision-making.
+      </p>
+    </section>
+
+  </article>
+</main>
+
+<footer>
+  <p>&copy; 2026 TyVaughn Yazzie</p>
+  <div class="social-icons">
+    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="LinkedIn">
+      <img src="images/linkedin-icon.svg" alt="LinkedIn" class="social-icon">
+    </a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

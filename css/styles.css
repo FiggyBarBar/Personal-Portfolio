@@ -1,0 +1,801 @@
+/*
+Name: TyVaughn Yazzie
+Date: 3/24/2026
+File: styles.css
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Reset */
+body, header, nav, main, footer, section, article, aside, figure, figcaption, h1, h2, h3, p, ul, li, a, img, iframe, ol {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* macOS dark color system */
+:root {
+  --bg:       #000000;
+  --panel:    #1c1c1e;
+  --card:     #2c2c2e;
+  --ink:      #f5f5f7;
+  --secondary: rgba(235, 235, 245, 0.6);
+  --tertiary:  rgba(235, 235, 245, 0.3);
+  --accent:   #0a84ff;
+  --orange:   #30d158;
+  --red:      #ff453a;
+  --green:    #30d158;
+  --line:     rgba(84, 84, 88, 0.65);
+  --glass:    rgba(28, 28, 30, 0.72);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  padding: 0 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ambient color blobs bleeding through the dark background */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -15%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, rgba(10, 132, 255, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -15%;
+  right: -15%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(ellipse at center, rgba(191, 90, 242, 0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* thin macOS-style scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(84, 84, 88, 0.5);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(84, 84, 88, 0.8);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.18s ease;
+}
+
+a:hover {
+  opacity: 0.72;
+}
+
+/* Header - frosted glass title bar */
+header {
+  text-align: center;
+  padding: 48px 20px 36px;
+  background: var(--glass);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2.4em;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 40px rgba(10, 132, 255, 0.25);
+  animation: titleGlow 4s ease-in-out infinite;
+}
+
+header h2 {
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--secondary);
+  margin-top: 6px;
+}
+
+figure {
+  margin: 16px auto 0;
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.88em;
+  color: var(--secondary);
+  margin-top: 10px;
+}
+
+/* Nav - frosted glass pill bar */
+nav {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  margin-bottom: 24px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+nav ul {
+  list-style-type: none;
+  display: none;
+}
+
+nav li {
+  margin: 4px 0;
+}
+
+nav a {
+  display: block;
+  padding: 10px 14px;
+  color: var(--ink);
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 0.93em;
+  letter-spacing: 0.1px;
+  transition: background-color 0.18s ease, transform 0.15s ease;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+nav.nav-open ul {
+  display: block;
+  animation: menuOpen 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
+  border-radius: 8px;
+  transition: background-color 0.18s ease;
+}
+
+.hamburger:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* CSS transform: bars rotate into an X when menu is open */
+nav.nav-open .hamburger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+nav.nav-open .hamburger span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+nav.nav-open .hamburger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+main {
+  padding-bottom: 24px;
+}
+
+main h2,
+main h3 {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+main p {
+  margin-bottom: 12px;
+  color: var(--secondary);
+  font-size: 0.96em;
+  line-height: 1.65;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px auto;
+  border-radius: 14px;
+}
+
+/* circular profile picture like macOS contact cards */
+.pfp {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  margin: 20px auto 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Cards */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.mobile-section {
+  display: block;
+  padding: 20px 0;
+}
+
+.desktop-section {
+  display: none;
+  padding: 20px 0;
+}
+
+/* Sections - dark material cards */
+section {
+  background: var(--panel);
+  color: var(--ink);
+  margin-top: 16px;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+section h2 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--ink);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 12px;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+section h2::before {
+  content: '';
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(10, 132, 255, 0.6);
+  animation: dotPulse 2.8s ease-in-out infinite;
+}
+
+section.not-ready h2::before {
+  background: #ff453a;
+  box-shadow: 0 0 8px rgba(255, 69, 58, 0.6);
+  animation: dotPulseRed 2.8s ease-in-out infinite;
+}
+
+section.clickable-card {
+  position: relative;
+  cursor: pointer;
+}
+
+section.clickable-card:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.click-hint {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.72em;
+  color: var(--accent);
+  opacity: 0.6;
+  letter-spacing: 0.2px;
+}
+
+article {
+  margin-top: 8px;
+  padding: 4px;
+}
+
+/* Aside - subtle amber tint */
+aside {
+  background: rgba(48, 209, 88, 0.06);
+  padding: 20px 22px;
+  margin-top: 16px;
+  color: var(--ink);
+  border: 1px solid rgba(48, 209, 88, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+
+aside h2 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--orange);
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(48, 209, 88, 0.18);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+aside h2::before {
+  content: '';
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 8px rgba(48, 209, 88, 0.6);
+}
+
+#contact {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-top: 20px;
+}
+
+/* contact info list - macOS settings-row style */
+#contact ul {
+  list-style: none;
+  margin-top: 14px;
+}
+
+#contact li {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.93em;
+  color: var(--secondary);
+}
+
+#contact li:last-child {
+  border-bottom: none;
+}
+
+iframe {
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+  border-radius: 14px;
+  margin-top: 14px;
+}
+
+/* Skills Table - macOS-style minimal table */
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 0.93em;
+}
+
+.skills-table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 0.78em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--secondary);
+  border-bottom: 1px solid var(--line);
+}
+
+.skills-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.skills-table thead {
+  background: transparent;
+}
+
+.skills-table tbody tr {
+  transition: background-color 0.18s ease;
+}
+
+.skills-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.skills-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.skills-table tbody tr:hover {
+  background-color: rgba(10, 132, 255, 0.1);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.contact-form label {
+  font-weight: 500;
+  color: var(--secondary);
+  font-size: 0.87em;
+  letter-spacing: 0.2px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+  font-size: 0.94em;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--tertiary);
+}
+
+.contact-form select option {
+  background: var(--card);
+  color: var(--ink);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+/* Submit button - macOS blue action button */
+.submit-btn {
+  padding: 12px 24px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(10, 132, 255, 0.4);
+  transition: opacity 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+  align-self: flex-start;
+}
+
+.submit-btn:hover {
+  opacity: 0.86;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(10, 132, 255, 0.5);
+}
+
+/* Footer - frosted glass bar */
+footer {
+  text-align: center;
+  padding: 28px 0;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--line);
+  font-size: 0.88em;
+  margin-top: 44px;
+}
+
+footer p {
+  color: var(--secondary);
+  font-weight: 400;
+  font-size: 0.95em;
+  letter-spacing: 0.2px;
+}
+
+footer ul {
+  list-style-type: none;
+  margin-top: 12px;
+}
+
+footer li {
+  margin: 5px 0;
+  color: var(--secondary);
+  font-size: 0.92em;
+}
+
+/* Tablet Layout (min-width: 600px) */
+@media screen and (min-width: 600px) {
+
+  .mobile-section { display: none; }
+  .desktop-section { display: block; }
+
+  body {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  nav li { margin: 0; }
+
+  .hamburger { display: none; }
+
+  nav a {
+    min-width: 96px;
+    padding: 8px 16px;
+  }
+
+  #projects,
+  #home {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+  }
+
+  aside { grid-column: span 2; }
+
+  footer ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    justify-items: center;
+    max-width: 500px;
+    margin: 12px auto 0;
+  }
+
+  .skills-table th,
+  .skills-table td { padding: 13px 18px; }
+
+  .contact-form { max-width: 560px; }
+}
+
+/* Desktop Layout (min-width: 900px) */
+@media screen and (min-width: 900px) {
+
+  body { max-width: 1100px; }
+
+  #projects, #home { grid-template-columns: 1fr 1fr 1fr; }
+  .grid { grid-template-columns: auto auto auto auto; }
+  #projects.grid { grid-template-columns: repeat(3, 1fr); }
+  aside { grid-column: span 4; }
+
+  nav a:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--ink);
+    transform: translateY(-1px);
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(10, 132, 255, 0.25);
+  }
+
+  section:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(10, 132, 255, 0.18);
+    transform: translateY(-2px);
+  }
+
+  .skills-table th,
+  .skills-table td { padding: 14px 20px; }
+
+  .contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 720px;
+  }
+
+  .contact-form label[for="subject"],
+  .contact-form label[for="message"] { grid-column: 1 / -1; }
+
+  .contact-form select,
+  .contact-form textarea,
+  .submit-btn { grid-column: 1 / -1; }
+}
+
+/* proficiency badge pill */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.badge-beginner {
+  background: rgba(10, 132, 255, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(10, 132, 255, 0.25);
+}
+
+/* =====================
+   Keyframe Animations
+   ===================== */
+
+/* Profile picture gentle float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-7px); }
+}
+
+/* Header title glow breathe */
+@keyframes titleGlow {
+  0%, 100% { text-shadow: 0 0 40px rgba(10, 132, 255, 0.25); }
+  50%       { text-shadow: 0 0 70px rgba(10, 132, 255, 0.55), 0 0 100px rgba(191, 90, 242, 0.2); }
+}
+
+/* Blue status dot pulse */
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(10, 132, 255, 0.5); }
+  50%       { box-shadow: 0 0 16px rgba(10, 132, 255, 1); }
+}
+
+/* Red status dot pulse */
+@keyframes dotPulseRed {
+  0%, 100% { box-shadow: 0 0 6px rgba(255, 69, 58, 0.5); }
+  50%       { box-shadow: 0 0 16px rgba(255, 69, 58, 1); }
+}
+
+/* Mobile nav menu slide-in */
+@keyframes menuOpen {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal — JS adds .in-view via IntersectionObserver */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Social Media Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--secondary);
+  font-size: 0.88em;
+  opacity: 1;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.social-icon-link:hover {
+  opacity: 0.75;
+  transform: translateY(-2px);
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Tablet viewport: slightly larger icon */
+@media screen and (min-width: 600px) {
+  .social-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Desktop viewport: larger icon with hover lift */
+@media screen and (min-width: 900px) {
+  .social-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .social-icon-link:hover {
+    opacity: 0.8;
+    transform: translateY(-3px);
+  }
+}
+
+/* Contact form result messages */
+.form-result {
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  font-weight: 500;
+  animation: fadeUp 0.3s ease forwards;
+}
+
+.form-result--success {
+  background: rgba(48, 209, 88, 0.12);
+  color: var(--green);
+  border: 1px solid rgba(48, 209, 88, 0.3);
+}
+
+.form-result--error {
+  background: rgba(255, 69, 58, 0.12);
+  color: var(--red);
+  border: 1px solid rgba(255, 69, 58, 0.3);
+}

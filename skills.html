@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+Name: TyVaughn Yazzie
+File Name: skills.html
+Date: 3/24/2026
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skills | TyVaughn Yazzie</title>
+  <meta name="description" content="Explore TyVaughn Yazzie's technical skills including HTML, CSS, JavaScript, and Python — all actively growing through hands-on projects.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h1>My Skills</h1>
+</header>
+
+<nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="journey.html">Journey</a></li>
+  </ul>
+</nav>
+
+<!-- Mobile View Content, list replaces table on small screens -->
+<main class="mobile-section">
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ol>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>Python</li>
+    </ol>
+  </section>
+</main>
+
+<!-- Tablet/Desktop View Content, table shown on wider screens -->
+<main class="desktop-section">
+  <section id="skills">
+    <h2>Technical Skills</h2>
+
+    <!-- skills table with 4 rows and 3 columns -->
+    <table class="skills-table">
+      <thead>
+        <tr>
+          <th>Technology</th>
+          <th>Proficiency</th>
+          <th>Experience</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>HTML</td>
+          <td><span class="badge badge-beginner">Beginner</span></td>
+          <td>Less than a year</td>
+        </tr>
+        <tr>
+          <td>CSS</td>
+          <td><span class="badge badge-beginner">Beginner</span></td>
+          <td>Less than a year</td>
+        </tr>
+        <tr>
+          <td>JavaScript</td>
+          <td><span class="badge badge-beginner">Beginner</span></td>
+          <td>Less than a year</td>
+        </tr>
+        <tr>
+          <td>Python</td>
+          <td><span class="badge badge-beginner">Beginner</span></td>
+          <td>Less than a year</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 TyVaughn Yazzie</p>
+  <div class="social-icons">
+    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="LinkedIn">
+      <img src="images/linkedin-icon.svg" alt="LinkedIn" class="social-icon">
+    </a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
